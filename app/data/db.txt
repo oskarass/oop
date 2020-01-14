@@ -1,0 +1,1 @@
+{"drinks":[{"name":"Svaboda","amount_ml":700,"abarot":55,"image":"\/media\/images\/svoboda.png"}]}

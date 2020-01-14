@@ -2,6 +2,28 @@
 
 require '../bootloader.php';
 
+$DB = new \Core\FileDB(DB_FILE);
+
+$modelDrinks = new \App\Drinks\Model();
+
+$drink = new App\Drinks\Drink([
+        'name' => 'Svaboda',
+        'abarot' => 55,
+        'amount_ml' => 700,
+        'image' => '/media/images/svoboda.png'
+]);
+
+$drinks = $modelDrinks->get([
+        'abarot' => 55,
+]);
+
+foreach ($drinks as $drink) {
+    var_dump($drink->getName());
+}
+
+$DB->load();
+$DB->createTable('drinks');
+
 ?>
 <html>
     <head>
@@ -12,6 +34,5 @@ require '../bootloader.php';
         <title>OOP</title>
     </head>
     <body>
-		<h1>Darome HIP, darome OOP bl</h1>
     </body>
 </html>

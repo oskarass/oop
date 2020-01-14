@@ -5,7 +5,7 @@ declare(strict_types = 1);
 require 'config.php';
 
 // Load Core Classes
-//require ROOT . '/vendor/autoload.php';
+require ROOT . '/vendor/autoload.php';
 
 // Load Core Functions
 require ROOT . '/core/functions/form/core.php';
