@@ -1,14 +1,11 @@
 <?php
 
 function validate_login($filtered_input, &$form) {
-    $login_success = \App\App::$session->login(
-            $filtered_input['email'],
-            $filtered_input['password']
-    );
+    $success = App\App::$session->login($filtered_input['email'], $filtered_input['password']);
 
-    if (!$login_success) {
-        $form['fields']['password']['error'] = 'Prisijungimo duomenys neteisingi!';
-        $form['fields']['password']['value'] = '';
+    if (!$success) {
+        $form['fields']['email']['error'] = 'Neteisingai įvesti duomenys!';
+        $form['fields']['password']['error'] = 'Neteisingai įvesti duomenys!';
         return false;
     }
 

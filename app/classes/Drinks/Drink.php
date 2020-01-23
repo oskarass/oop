@@ -7,7 +7,7 @@ class Drink
     private $data;
 
     private $properties = [
-        'name', 'amount_ml', 'abarot', 'image'
+        'id', 'name', 'amount_ml', 'abarot', 'image', 'price', 'in_stock'
     ];
 
     public function __construct(array $data = null)
@@ -50,6 +50,22 @@ class Drink
         return $this->data['image'];
     }
 
+    public function setPrice(float $price) {
+        $this->data['price'] = $price;
+    }
+
+    public function getPrice() {
+        return $this->data['price'];
+    }
+
+    public function setInStock(int $in_stock) {
+        $this->data['in_stock'] = $in_stock;
+    }
+
+    public function getInStock() {
+        return $this->data['in_stock'];
+    }
+
     public function setData(array $data) {
 
         foreach($this->properties as $property) {
@@ -81,7 +97,7 @@ class Drink
     }
 
     public function getId() {
-        return $this->data['id'];
+        return $this->data['id'] ?? null;
     }
 
 

@@ -4,13 +4,13 @@ namespace Core;
 
 class FileDB
 {
-
     private $file_name;
     private $data;
 
     public function __construct($file_name)
     {
         $this->file_name = $file_name;
+        $this->load();
     }
 
     public function setData($data_array)
@@ -46,7 +46,7 @@ class FileDB
 
     public function createTable($table_name)
     {
-        if($this->tableExists($table_name)) {
+        if(!$this->tableExists($table_name)) {
             $this->data[$table_name] = [];
             return true;
         }
@@ -56,7 +56,7 @@ class FileDB
 
     public function tableExists($table_name)
     {
-        if(!isset($this->data[$table_name])) {
+        if(isset($this->data[$table_name])) {
             return true;
         }
 
@@ -102,7 +102,7 @@ class FileDB
     public function updateRow($table_name, $row_id, $row)
     {
         if($this->rowExists($table_name, $row_id)) {
-            $this->data[$table_name] = $row;
+            $this->data[$table_name][$row_id] = $row;
             return true;
         }
         return false;
@@ -118,6 +118,7 @@ class FileDB
             return false;
         }
     }
+
 
     public function getRow($table_name, $row_id)
     {
