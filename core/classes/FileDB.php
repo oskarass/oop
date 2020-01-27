@@ -92,7 +92,7 @@ class FileDB
 
     public function rowExists($table_name, $row_id)
     {
-        if(isset($table_name[$row_id])) {
+        if(isset($this->data[$table_name][$row_id])) {
             return true;
         }
 
@@ -125,6 +125,9 @@ class FileDB
         if($this->rowExists($table_name, $row_id)) {
             return $this->data[$table_name][$row_id];
         }
+
+        var_dump("getRow false", $row_id);
+        var_dump($this->data[$table_name][$row_id]);
 
         return false;
     }

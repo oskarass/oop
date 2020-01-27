@@ -38,7 +38,9 @@ Class Model
     }
 
     public function getById($row_id) {
+        var_dump('getbyid');
         $drink_array = App::$db->getRow($this->table_name, $row_id);
+        var_dump($drink_array);
         $drink = new Drink($drink_array);
         $drink->setId($row_id);
 

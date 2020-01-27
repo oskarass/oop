@@ -2,13 +2,15 @@
 
 namespace App\Orders;
 
+use App\App;
+
 class Order
 
 {
     private $data;
 
     private $properties = [
-        'id', 'drink_id', 'timestamp'
+        'id', 'drink_id', 'timestamp', 'status'
     ];
 
     public function __construct(array $data = null)
@@ -32,6 +34,14 @@ class Order
 
     public function getTimestamp() {
         return $this->data['timestamp'] ?? null;
+    }
+
+    public function setStatus(string $status) {
+        $this->data['status'] = $status;
+    }
+
+    public function getStatus() {
+        return $this->data['status'] ?? null;
     }
 
     public function setData(array $data) {

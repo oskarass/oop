@@ -35,6 +35,17 @@ class Model
         return $orders_objects;
     }
 
+    public function getById($row_id) {
+        $order_array = App::$db->getRow($this->table_name, $row_id);
+        var_dump("get by id", $order_array, $row_id);
+
+
+        $order = new Order($order_array);
+        $order->setId($row_id);
+
+        return $order;
+    }
+
     public function update(Order $order)
     {
         return App::$db->updateRow($this->table_name, $order->getId(), $order->getData());

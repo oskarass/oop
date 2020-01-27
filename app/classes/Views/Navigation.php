@@ -17,6 +17,10 @@ class Navigation extends \Core\View
                 ]
             ],
             'right' => [
+                'orders' => [
+                    'title' => 'Orders',
+                    'url' => '/orders.php'
+                ],
                 'login' => [
                     'title' => 'Login',
                     'url' => '/login.php'
@@ -37,6 +41,7 @@ class Navigation extends \Core\View
             unset($this->data['right']['register']);
         } else {
             unset($this->data['right']['logout']);
+            unset($this->data['right']['orders']);
         }
 
     }

@@ -1,6 +1,5 @@
 <?php
 
-use App\App;
 use App\Drinks\Drink;
 use App\Views\Form;
 use App\Views\Navigation;
@@ -16,16 +15,21 @@ if ($user = \App\App::$session->getUser()){
 
 function form_success_edit($input, &$form)
 {
-//    $modelDrinks = new \App\Drinks\Model();
-//    $drink = new App\Drinks\Drink($input);
-//    $modelDrinks->update($drink);
+    $modelDrinks = new \App\Drinks\Model();
+    $input['id'] = (int) $input['id'];
+    $drink = new App\Drinks\Drink($input);
+    $modelDrinks->update($drink);
 }
 
 function form_fail_edit(&$form, $input)
 {
-    $form['message'] = 'Form failed!';
+    $form['message'] = 'Edit failed!';
 }
 
+
+$modelDrinks = new \App\Drinks\Model();
+$drink = $modelDrinks->getById($_GET['id']);
+$drink_array = $drink->getData();
 
 $form_edit = [
     'callbacks' => [
@@ -38,6 +42,10 @@ $form_edit = [
         'id' => 'login-form',
     ],
     'fields' => [
+        'id' => [
+            'type' => 'hidden',
+            'value' =>  $_GET['id'],
+        ],
         'name' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
             'label' => 'Pavadinimas',
@@ -164,6 +172,13 @@ $form_edit = [
         ]
     ],
 ];
+
+$form_edit['fields']['name']['value'] = $drink_array['name'];
+$form_edit['fields']['amount_ml']['value'] = $drink_array['amount_ml'];
+$form_edit['fields']['abarot']['value'] = $drink_array['abarot'];
+$form_edit['fields']['image']['value'] = $drink_array['image'];
+$form_edit['fields']['price']['value'] = $drink_array['price'];
+$form_edit['fields']['in_stock']['value'] = $drink_array['in_stock'];
 
 $views = [];
 $views['form'] = new Form($form_edit);

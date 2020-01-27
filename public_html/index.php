@@ -43,7 +43,8 @@ function form_success_order($input, &$form)
     $modelOrders = new \App\Orders\Model();
     $order = new App\Orders\Order([
         'drink_id' => $input['id'],
-        'timestamp' => time()
+        'timestamp' => time(),
+        'status' => 'Pending'
     ]);
     $modelOrders->insert($order);
 
@@ -55,8 +56,6 @@ function form_success_order($input, &$form)
     $drink->setInStock($new_stock);
 
     $modelDrinks->update($drink);
-
-    $form['message'] = 'Order Successful';
 }
 
 function form_fail_order(&$form, $input)
@@ -77,7 +76,7 @@ $form_create = [
     'fields' => [
         'name' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'label' => 'Pavadinimas',
+            'label' => '',
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
@@ -96,7 +95,7 @@ $form_create = [
         ],
         'amount_ml' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'label' => 'Kiekis',
+            'label' => '',
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
@@ -115,7 +114,7 @@ $form_create = [
         ],
         'abarot' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'label' => 'Abarot',
+            'label' => '',
             'type' => 'number',
             'validators' => [
                 'validate_not_empty',
@@ -134,7 +133,7 @@ $form_create = [
         ],
         'image' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'label' => 'Image',
+            'label' => '',
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
@@ -153,7 +152,7 @@ $form_create = [
         ],
         'price' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'label' => 'Price',
+            'label' => '',
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
@@ -172,7 +171,7 @@ $form_create = [
         ],
         'in_stock' => [
             'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'label' => 'In Stock',
+            'label' => '',
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
@@ -242,7 +241,6 @@ $form_edit = [
     'fields' => [
         'id' => [
             'type' => 'hidden',
-
         ]
     ],
     'buttons' => [
